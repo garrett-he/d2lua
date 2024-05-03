@@ -1,5 +1,5 @@
-#include "d2lua.h"
 #include <exception>
+#include "d2lua.h"
 
 D2Lua::D2Lua(HMODULE hModule)
 {
@@ -11,4 +11,10 @@ D2Lua::D2Lua(HMODULE hModule)
 
     module = hModule;
     dllName = std::string(path);
+
+    L = luaL_newstate();
+    luaL_openlibs(L);
+
+    auto entryFile = dllName.substr(0, dllName.find_last_of('\\')) + "\\main.lua";
+    luaL_dofile(L, entryFile.c_str());
 }
