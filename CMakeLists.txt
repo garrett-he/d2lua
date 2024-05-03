@@ -6,4 +6,6 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 include_directories(include)
 
-add_library(d2lua SHARED src/dllmain.cpp)
+aux_source_directory(src SRC_DIR)
+
+add_library(d2lua SHARED ${SRC_DIR})
